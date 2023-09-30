@@ -1,23 +1,19 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import {
-  createBrowserRouter,
-  RouterProvider,
+  BrowserRouter,
 } from "react-router-dom";
-import "./index.css";
-import Root from "./routes/root";
-import Test from "./routes/test";
+import "./index.scss";
+import App from "./routes/app/app";
+import { NextUIProvider } from "@nextui-org/react";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-  },
-  {
-    path: "test",
-    element: <Test />,
-  }
-]);
+
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App />,
+//   },
+// ]);
 
 
 const rootElement = document.getElementById('root')!
@@ -25,7 +21,13 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>,
+      <BrowserRouter>
+          <NextUIProvider>
+            <main className="dark text-foreground bg-background">
+              <App />
+            </main>
+          </NextUIProvider>
+      </BrowserRouter>
+    </React.StrictMode>
   )
 }
