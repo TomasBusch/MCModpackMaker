@@ -1,14 +1,15 @@
 import { Outlet } from "react-router-dom";
-import MCNavbar from "./navbar/mcnavbar";
+import Navbar from "./navbar/navbar";
 
 export default function DefaultLayout() {
     return (
-      <div>
-        <MCNavbar />
-            {/* An <Outlet> renders whatever child route is currently active,
-            so you can think about this <Outlet> as a placeholder for
-            the child routes we defined above. */}
-        <Outlet />
-      </div>
+      <>
+        <div className="flex flex-col h-full gap-4">
+          <Navbar /> 
+        <div className="flex-auto mt-0 overflow-y-auto md:mt-2">
+          <Outlet />
+        </div>
+        </div>
+      </>
     );
 }

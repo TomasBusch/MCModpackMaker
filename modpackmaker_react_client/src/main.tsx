@@ -5,29 +5,16 @@ import {
 } from "react-router-dom";
 import "./index.scss";
 import App from "./routes/app/app";
-import { NextUIProvider } from "@nextui-org/react";
 
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App />,
-//   },
-// ]);
-
-
-const rootElement = document.getElementById('root')!
+const rootElement = document.getElementById('root')!;
 if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement)
+  const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-          <NextUIProvider>
-            <main className="dark text-foreground bg-background">
-              <App />
-            </main>
-          </NextUIProvider>
+              <App/>
       </BrowserRouter>
     </React.StrictMode>
-  )
+  );
 }
