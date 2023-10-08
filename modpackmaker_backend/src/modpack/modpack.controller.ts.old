@@ -1,0 +1,37 @@
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { ModpackService } from './modpack.service';
+import { CreateModpackDto } from './schema/modpack/dto/createModpackDto';
+import { Modpack } from './schema/modpack/type/modpack';
+
+@Controller('modpack')
+export class ModpackController {
+  constructor(private readonly modpackService: ModpackService) {}
+
+  @Post()
+  async create(@Body() createModpackDto: CreateModpackDto) {
+    await this.modpackService.create(createModpackDto);
+  }
+
+  @Post(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() createModpackDto: CreateModpackDto,
+  ) {
+    await this.modpackService.addMod(id, createModpackDto.modIdList[0]);
+  }
+
+  @Get()
+  async findAll(): Promise<Modpack[]> {
+    return this.modpackService.list();
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string): Promise<Modpack> {
+    return this.modpackService.getById(id);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return this.modpackService.delete(id);
+  }
+}

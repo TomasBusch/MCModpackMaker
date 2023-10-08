@@ -1,0 +1,18 @@
+import { Test, TestingModule } from '@nestjs/testing';
+import { ModpackController } from './modpack.controller.ts.old';
+
+describe('ModpackController', () => {
+  let controller: ModpackController;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [ModpackController],
+    }).compile();
+
+    controller = module.get<ModpackController>(ModpackController);
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});
