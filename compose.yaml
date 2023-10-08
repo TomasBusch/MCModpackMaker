@@ -1,19 +1,31 @@
 version: "3.8"
 
 services:
-  postgres_db:
-    container_name: postgres_db
-    image: postgres:alpine
+  # postgres_db:
+  #   container_name: postgres_db
+  #   image: postgres:alpine
+  #   env_file: default.env
+  #   hostname: db
+  #   restart: always
+  #   volumes:
+  #     - db_data:/var/lib/postgresql/data
+  #   expose:
+  #     - 5432
+
+  mongo_db:
+    container_name: mongo_db
+    restart: unless-stopped
+    image: mongo:latest
     env_file: default.env
     hostname: db
-    restart: always
     volumes:
-      - db_data:/var/lib/postgresql/data
-    expose:
-      - 5432
+      - db_data:/data/db
+    ports:
+      - 27017:27017
 
 
   redis_cache:
+    restart: unless-stopped
     container_name: redis_cache
     image: 'redislabs/redismod'
     hostname: cache
@@ -22,7 +34,7 @@ services:
 
   backend:
     container_name: modpackmaker_backend
-    restart: on-failure
+    restart: unless-stopped
     build: ./modpackmaker_backend
     hostname: backend
     ports:
@@ -31,10 +43,11 @@ services:
       - default.env
     depends_on:
       - redis_cache
+      - mongo_db
 
   curseforge_api:
     container_name: modpackmaker_curseforge_api
-    restart: on-failure
+    restart: unless-stopped
     build: ./curseforge_api_proxy
     hostname: curseforge
     ports:
@@ -47,7 +60,7 @@ services:
 
   modrinth_api:
     container_name: modpackmaker_modrinth_api
-    restart: on-failure
+    restart: unless-stopped
     build: ./modrinth_api_proxy
     hostname: modrinth
     ports:
@@ -60,7 +73,7 @@ services:
       
   nginx:
     container_name: nginx_server
-    restart: on-failure
+    restart: unless-stopped
     build: ./modpackmaker_react_client
     ports:
       - 80:80
