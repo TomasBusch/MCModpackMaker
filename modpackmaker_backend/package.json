@@ -17,8 +17,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json",
-    "generate-types": "ts-node generate-typings"
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
     "@apollo/server": "^4.9.4",
@@ -35,10 +34,12 @@
     "graphql": "^16.8.1",
     "graphql-query-complexity": "^0.12.0",
     "graphql-subscriptions": "^2.0.0",
+    "graphql-ws": "^5.14.1",
     "mongoose": "^7.6.0",
     "redis": "^4.6.10",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
