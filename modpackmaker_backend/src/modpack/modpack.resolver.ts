@@ -52,8 +52,8 @@ export class ModpackResolver {
     return this.modpackService.delete(_id);
   }
 
-  // @Subscription(() => Modpack)
-  // async modpackAdded() {
-  //   return pubSub.asyncIterator('modpackAdded');
-  // }
+  @Subscription(() => Modpack)
+  async modpackAdded() {
+    return pubSub.asyncIterator('modpackAdded');
+  }
 }
