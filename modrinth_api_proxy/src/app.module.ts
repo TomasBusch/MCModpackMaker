@@ -14,7 +14,7 @@ import { RedisClientOptions } from 'redis';
         host: process.env.REDIS_HOST ?? 'localhost',
         port: parseInt(process.env.REDIS_PORT ?? '6379'),
       },
-      ttl: 1000,
+      ttl: 10000,
       max: 10000,
     }),
   ],
