@@ -19,12 +19,8 @@ export default function ToggleButton({onChange=undefined}: {onChange: onChangeFu
 
   return (
         <Switch checked={enabled} onChange={handleChange} as={Fragment}>
-            {({ checked }) => (
-                /* Use the `checked` state to conditionally style the button. */
                 <button
-                className={`${
-                    checked ? 'bg-zinc-800' : 'bg-zinc-800'
-                } relative flex items-center justify-items-center rounded-md hover:bg-zinc-700 border border-zinc-700`}
+                className='relative flex items-center border rounded-md bg-zinc-800/50 backdrop-blur-md justify-items-center hover:bg-zinc-700 border-zinc-700'
                 >
                 <div className='h-10 p-2'>
                 {enabled ? 
@@ -33,7 +29,6 @@ export default function ToggleButton({onChange=undefined}: {onChange: onChangeFu
                 }
                 </div>
                 </button>
-            )}
         </Switch>
   );
 }

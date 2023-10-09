@@ -21,7 +21,7 @@ const formatter = Intl.NumberFormat("en", { notation: "compact" });
     
   return (
     <>
-    <div className="flex flex-wrap items-center w-full gap-4 p-4 my-4 border rounded-md shadow-md bg-zinc-800 border-zinc-700 md:flex-nowrap">
+    <div className="flex flex-wrap items-center w-full gap-4 p-4 my-4 border rounded-md shadow-md bg-zinc-800/50 border-zinc-700 md:flex-nowrap backdrop-blur-md">
         {item.icon == "" ?<NoLogo/> : <img src={item.icon} className='object-contain w-20 h-20 rounded-lg bg-zinc-700'/>}
     <div className="flex flex-col basis-1/2 grow">
         <div className='flex items-center flex-1 gap-4'>

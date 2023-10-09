@@ -12,7 +12,7 @@ export default function SearchSidebar() {
       
     
     return (
-        <div className="w-0 overflow-y-auto transition-all shadow-md xl:h-full rounded-r-md xl:rounded-md md:border border-zinc-700 md:w-16 xl:w-80 absdolute bg-zinc-800 scrollbar scrollbar-track-transparent scrollbar-thumb-sky-600 scrollbar-thumb-rounded-md scrollbar-w-1">
+        <div className="w-0 overflow-y-auto transition-all shadow-md xl:h-full rounded-r-md xl:rounded-md md:border border-zinc-700 md:w-16 xl:w-80 absdolute bg-zinc-800/50 scrollbar scrollbar-track-transparent scrollbar-thumb-sky-600 scrollbar-thumb-rounded-md scrollbar-w-1 backdrop-blur-md">
         <div className="h-full overflow-x-hidden xl:p-4 scrollbar scrollbar-track-transparent scrollbar-thumb-sky-600 scrollbar-thumb-rounded-md scrollbar-w-1 ">
         {/* Large Sidebar */}
         <div className='flex-col sm:hidden xl:flex'>
@@ -50,25 +50,6 @@ export default function SearchSidebar() {
             <button><HeroIcons.ClipboardDocumentListIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></button>
             <button><HeroIcons.LockOpenIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></button>
         </div>
-            {/* <Select 
-            label="Select a repository" 
-            className="inline-block max-w-xs" 
-            >
-            {modRepos.map((repo) => (
-            <SelectItem key={repo.value} value={repo.value}>
-                {repo.label}
-            </SelectItem>
-            ))}
-            </Select>
-        </div>
-        <Divider/>
-        <div className="inline-block px-4 pt-2 pb-4">
-            <div className="mb-2 text-xl">Categories</div>
-            <CheckboxGroup defaultValue={[]}>
-                {modrinthCategories.map((category) => (
-                    <Checkbox className="text-xs" key={category.value} value={category.value}>{category.label}</Checkbox>  
-                ))}
-            </CheckboxGroup> */}
         </div>
         </div>
     );
