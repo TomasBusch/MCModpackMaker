@@ -30,8 +30,8 @@ export default function Navbar(){
                 </div>
             </div>
             <div className="items-center hidden gap-4 md:flex">
-                <Link to="/register"><button className="w-20 px-2 py-1 bg-green-700 rounded shadow-lg text-zinc-100 hover:bg-green-600">Register</button></Link>
-                <Link to="/login"><button className="w-20 px-2 py-1 rounded shadow-lg bg-sky-700 text-zinc-100 hover:bg-sky-600">Log In</button></Link>
+                <Link to="/register"><button className="w-20 px-2 py-1 bg-green-500 rounded shadow-lg text-zinc-100 hover:bg-green-400">Register</button></Link>
+                <Link to="/login"><button className="w-20 px-2 py-1 bg-blue-500 rounded shadow-lg text-zinc-100 hover:bg-sky-400">Log In</button></Link>
             </div>
         </div>
         </div>
