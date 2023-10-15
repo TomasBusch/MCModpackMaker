@@ -5,7 +5,9 @@ import { useState } from 'react';
 import ListBox from '../../../ui/listBox';
 import { modrinthCategories } from './data/categories/modrinthCategories';
 import { modrinthLoaders } from './data/loaders/modrinthLoaders';
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import {Button, Item, Label, Popover, ListBox as AriaListBox, Select, SelectValue} from 'react-aria-components';
+import { ComboBox } from '../../../ui/comboBox';
 
 export default function SearchSidebar() {
     const [allVersions, setAllVersions] = useState(false);
@@ -20,35 +22,36 @@ export default function SearchSidebar() {
             {modrinthCategories.map((category) => 
             <div key={category.value} className='flex ml-2'>
                 <input id={category.value} type="checkbox" value="" name={category.value} className="w-4 h-4 transition-all border-blue-600 rounded appearance-none bg-zinc-700 checked:border-4 checked:bg-zinc-600 checked:zhadow-inner hover:bg-zinc-600" ></input>
-                <label htmlFor={category.value} className="flex-1 ml-2 text-sm font-medium select-none text-zinc-900 dark:text-zinc-300">{category.label}</label>
+                <Label htmlFor={category.value} className="flex-1 ml-2 text-sm font-medium select-none text-zinc-900 dark:text-zinc-300">{category.label}</Label>
             </div>
             )}
             <p className='my-2 text-lg font-bold select-none'>Loaders</p>
             {modrinthLoaders.map((loaders) => 
             <div key={loaders.value} className='flex ml-2'>
                 <input id={loaders.value} type="checkbox" value="" name={loaders.value} className="w-4 h-4 transition-all border-blue-600 rounded appearance-none bg-zinc-700 checked:border-4 checked:bg-zinc-600 checked:zhadow-inner hover:bg-zinc-600"></input>
-                <label htmlFor={loaders.value} className="flex-1 ml-2 text-sm font-medium select-none text-zinc-900 dark:text-zinc-300">{loaders.label}</label>
+                <Label htmlFor={loaders.value} className="flex-1 ml-2 text-sm font-medium select-none text-zinc-900 dark:text-zinc-300">{loaders.label}</Label>
             </div>
             )}
             <p className='my-2 text-lg font-bold select-none'>Minecraft Version</p>
             <div className='flex ml-2'>
             <input id="allVersions" type="checkbox" checked={allVersions} name="allVersions" className="w-4 h-4 transition-all border-blue-600 rounded appearance-none bg-zinc-700 checked:border-4 checked:bg-zinc-600 checked:zhadow-inner hover:bg-zinc-600" onChange={() => setAllVersions(!allVersions)}></input>
-            <label htmlFor="allVersions" className="flex-1 ml-2 text-sm font-medium select-none text-zinc-900 dark:text-zinc-300">Show all minecraft versions</label>
+            <Label htmlFor="allVersions" className="flex-1 ml-2 text-sm font-medium select-none text-zinc-900 dark:text-zinc-300">Show all minecraft versions</Label>
             </div>
-            <VersionListBox allVersions={allVersions}/>
+            {/* <VersionListBox allVersions={allVersions}/> */}
+            <ComboBox items={["1.20.1", "1.19.2", "1.12.2"]}></ComboBox>
             <p className='my-2 text-lg font-bold select-none'>Open Source</p>
             <div className='flex ml-2'>
             <input id="openSource" type="checkbox" name="openSource" className="w-4 h-4 transition-all border-blue-600 rounded appearance-none bg-zinc-700 checked:border-4 checked:bg-zinc-600 checked:zhadow-inner hover:bg-zinc-600"></input>
-            <label htmlFor="openSource" className="flex-1 ml-2 text-sm font-medium select-none text-zinc-900 dark:text-zinc-300">Only show open source mods</label>
+            <Label htmlFor="openSource" className="flex-1 ml-2 text-sm font-medium select-none text-zinc-900 dark:text-zinc-300">Only show open source mods</Label>
             </div>
         </div>
         {/* Compact Sidebar */}
         <div className='flex-col md:flex sm:hidden xl:hidden'>
-            <button><HeroIcons.Bars3BottomLeftIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></button>
-            <button><HeroIcons.ArchiveBoxArrowDownIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></button>
-            <button><HeroIcons.ServerStackIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></button>
-            <button><HeroIcons.ClipboardDocumentListIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></button>
-            <button><HeroIcons.LockOpenIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></button>
+            <Button><HeroIcons.Bars3BottomLeftIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></Button>
+            <Button><HeroIcons.ArchiveBoxArrowDownIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></Button>
+            <Button><HeroIcons.ServerStackIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></Button>
+            <Button><HeroIcons.ClipboardDocumentListIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></Button>
+            <Button><HeroIcons.LockOpenIcon className='w-16 p-4 bg-transparent hover:bg-zinc-700'/></Button>
         </div>
         </div>
         </div>
