@@ -24,9 +24,7 @@ module.exports = {
     "semi": [2, "always"],
     "no-extra-semi": "off",
     "prettier/prettier": 
-    [ "error",
-      {
-        "endOfLine": "auto"}
-    ]
+    ["error", {"endOfLine": "auto", "printWidth": 120}],
+    "max-len": 120,
   },
 };
