@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Schema as MongooseSchema } from 'mongoose';
-import { ListModpackInput } from './models/modpack/dto/list-modpack.input';
-import { NewModpackInput } from './models/modpack/dto/new-modpack.input';
-import { Modpack } from './models/modpack/modpack.model';
-import { UpdateModpackInput } from './models/modpack/dto/update-modpack.input';
+import { ListModpackInput } from '../models/dto/list-modpack.input';
+import { NewModpackInput } from '../models/dto/new-modpack.input';
+import { UpdateModpackInput } from '../models/dto/update-modpack.input';
+import { Modpack } from '../models/modpack.model';
 
 @Injectable()
 export class ModpackService {
@@ -21,8 +21,15 @@ export class ModpackService {
     return this.modpackModel.findById(_id).exec();
   }
 
+  async findOne(filters: ListModpackInput): Promise<Modpack[]> {
+    return this.modpackModel
+      .find()
+      .setOptions({ ...filters })
+      .exec();
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async list(filters: ListModpackInput): Promise<Modpack[]> {
+  async findMany(filters: ListModpackInput): Promise<Modpack[]> {
     return this.modpackModel
       .find()
       .setOptions({ ...filters })

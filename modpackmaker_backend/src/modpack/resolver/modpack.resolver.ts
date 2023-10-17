@@ -3,11 +3,11 @@ import { NotFoundException } from '@nestjs/common';
 import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { PubSub } from 'graphql-subscriptions';
 import { Schema as MongooseSchema } from 'mongoose';
-import { ListModpackInput } from './models/modpack/dto/list-modpack.input';
-import { NewModpackInput } from './models/modpack/dto/new-modpack.input';
-import { UpdateModpackInput } from './models/modpack/dto/update-modpack.input';
-import { Modpack } from './models/modpack/modpack.model';
-import { ModpackService } from './modpack.service';
+import { ListModpackInput } from '../models/dto/list-modpack.input';
+import { NewModpackInput } from '../models/dto/new-modpack.input';
+import { UpdateModpackInput } from '../models/dto/update-modpack.input';
+import { Modpack } from '../models/modpack.model';
+import { ModpackService } from '../service/modpack.service';
 
 const pubSub = new PubSub();
 
@@ -15,8 +15,8 @@ const pubSub = new PubSub();
 export class ModpackResolver {
   constructor(private readonly modpackService: ModpackService) {}
 
-  @Query(() => Modpack)
-  async modpack(
+  @Query(() => Modpack, { name: 'getModpack' })
+  async get(
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
   ): Promise<Modpack> {
     const modpack = await this.modpackService.getById(_id);
@@ -26,13 +26,13 @@ export class ModpackResolver {
     return modpack;
   }
 
-  @Query(() => [Modpack])
-  async modpacks(@Args() payload: ListModpackInput): Promise<Modpack[]> {
-    return this.modpackService.list(payload);
+  @Query(() => [Modpack], { name: 'getModpackList' })
+  async getList(@Args() payload: ListModpackInput): Promise<Modpack[]> {
+    return this.modpackService.findMany(payload);
   }
 
-  @Mutation(() => Modpack)
-  async createModpack(
+  @Mutation(() => Modpack, { name: 'createModpack' })
+  async create(
     @Args('newModpackData') payload: NewModpackInput,
   ): Promise<Modpack> {
     const modpack = await this.modpackService.create(payload);
@@ -40,20 +40,20 @@ export class ModpackResolver {
     return modpack;
   }
 
-  @Mutation(() => Modpack)
-  async updatePerson(@Args('payload') payload: UpdateModpackInput) {
+  @Mutation(() => Modpack, { name: 'updateModpack' })
+  async update(@Args('payload') payload: UpdateModpackInput) {
     return this.modpackService.update(payload);
   }
 
-  @Mutation(() => Boolean)
-  async deleteModpack(
+  @Mutation(() => Boolean, { name: 'deleteModpack' })
+  async delete(
     @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
   ) {
     return this.modpackService.delete(_id);
   }
 
-  @Subscription(() => Modpack)
-  async modpackAdded() {
+  @Subscription(() => Modpack, { name: 'modpackAdded' })
+  async added() {
     return pubSub.asyncIterator('modpackAdded');
   }
 }

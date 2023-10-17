@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ModpackService } from './modpack.service';
-import { Modpack, ModpackSchema } from './models/modpack/modpack.model';
-import { ModpackResolver } from './modpack.resolver';
+import { Modpack, ModpackSchema } from './models/modpack.model';
+import { ModpackResolver } from './resolver/modpack.resolver';
+import { ModpackService } from './service/modpack.service';
 
 @Module({
   imports: [

@@ -7,6 +7,9 @@ import { ModpackModule } from '../modpack/modpack.module';
 import { AppService } from './app.service';
 import { join } from 'path';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
+import { UserModule } from 'src/user/user.module';
+import { AuthModule } from 'src/auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 // import { ApolloServerPluginLandingPageProductionDefault } from '@apollo/server/plugin/landingPage/default';
 
 @Module({
@@ -21,8 +24,12 @@ import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin
       subscriptions: {
         'graphql-ws': true,
       },
+      context: ({ req, res }) => ({ req, res }),
     }),
+    ConfigModule.forRoot({ isGlobal: true }),
     ModpackModule,
+    UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
