@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from 'react-aria-components';
 
 export default function ModpackCard(props: { data: {title: string, version: string} }) {

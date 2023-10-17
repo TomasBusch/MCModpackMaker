@@ -1,12 +1,9 @@
 import * as HeroIcons from '@heroicons/react/24/outline';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useState } from 'react';
-import ListBox from '../../../ui/listBox';
 import { modrinthCategories } from './data/categories/modrinthCategories';
 import { modrinthLoaders } from './data/loaders/modrinthLoaders';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import {Button, Item, Label, Popover, ListBox as AriaListBox, Select, SelectValue} from 'react-aria-components';
+// import {Item, Popover, ListBox as AriaListBox, Select, SelectValue} from 'react-aria-components';
+import {Button, Label} from 'react-aria-components';
 import { ComboBox } from '../../../ui/comboBox';
 
 export default function SearchSidebar() {
@@ -58,62 +55,62 @@ export default function SearchSidebar() {
     );
 }
 
-type MojangMinecraftVersionQuery = {
-    latest: {
-        release: string,
-        snapshot: string
-    }
-    versions: minecraftVersion[]
-};
+// type MojangMinecraftVersionQuery = {
+//     latest: {
+//         release: string,
+//         snapshot: string
+//     }
+//     versions: minecraftVersion[]
+// };
 
-type minecraftVersion = {
-        id: string,
-        type: string,
-        url: string,
-        time: string,
-        releaseTime: string,
-        sha1: string,
-        complianceLevel: number
-};
+// type minecraftVersion = {
+//         id: string,
+//         type: string,
+//         url: string,
+//         time: string,
+//         releaseTime: string,
+//         sha1: string,
+//         complianceLevel: number
+// };
 
-type minecraftVersionData = {
-        id: string | number,
-        name: string,
-        disabled: boolean,
-};
+// type minecraftVersionData = {
+//         id: string | number,
+//         name: string,
+//         disabled: boolean,
+// };
 
-function VersionListBox({allVersions}: {allVersions: boolean}){
+// function VersionListBox({allVersions}: {allVersions: boolean}){
     
-    const { data, isSuccess, isLoading, isError }= useQuery({ 
-    queryKey: ['minecraft_versions', allVersions], 
+//     const { data, isSuccess, isLoading, isError }= useQuery({ 
+//     queryKey: ['minecraft_versions', allVersions], 
     
-    queryFn: ():Promise<minecraftVersionData[]> => 
-        {
-            return axios
-            .get<MojangMinecraftVersionQuery>(`https://launchermeta.mojang.com/mc/game/version_manifest_v2.json`, {})
-            .then((res) => res.data.versions
-                .filter((e) => e.type === "release" || allVersions )
-                .map((e) => {
-                    return{id: e.id, name: e.id, disabled: false};
-                    }
-                )
-            );
-        },
-    }); 
+//     queryFn: ():Promise<minecraftVersionData[]> => 
+//         {
+//             return axios
+//             .get<MojangMinecraftVersionQuery>(`https://launchermeta.mojang.com/mc/game/version_manifest_v2.json`, {})
+//             .then((res) => res.data.versions
+//                 .filter((e) => e.type === "release" || allVersions )
+//                 .map((e) => {
+//                     return{id: e.id, name: e.id, disabled: false};
+//                     }
+//                 )
+//             );
+//         },
+//     }); 
 
-    if (isLoading) {
-        return <></>;
-    }
+//     if (isLoading) {
+//         return <></>;
+//     }
 
-    if (isError) {
-        return <></>;
-    }
+//     if (isError) {
+//         return <></>;
+//     }
     
-    if(isSuccess){
-    return(
-        <>
-            <ListBox options={data}/>
-        </>
-    );
-    }
-}
+//     if(isSuccess){
+//     return(
+//         <>
+//             <ListBox options={data}/>
+//         </>
+//     );
+//     }
+// }

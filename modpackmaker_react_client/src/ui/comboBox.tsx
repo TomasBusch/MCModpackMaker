@@ -1,5 +1,6 @@
 import * as HeroIcons from '@heroicons/react/24/outline';
-import { ComboBox as AriaComboBox, Button, Header, Input, Item, Label, ListBox, Popover, Section, Text } from "react-aria-components";
+// import { Header, Section, Text } from "react-aria-components";
+import { ComboBox as AriaComboBox, Button, Input, Item, Label, ListBox, Popover } from "react-aria-components";
 
 
 export function ComboBox({label="", items=[]}: {label?: string , items?: string[]}) {

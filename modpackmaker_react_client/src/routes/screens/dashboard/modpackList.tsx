@@ -1,4 +1,3 @@
-import React from 'react';
 import ModpackCard from './modpackCard';
 
 export default function ModpackList(props: {modpacks: string[]}) {
