@@ -1,4 +1,4 @@
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, UseGuards } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { GraphQLContext } from 'src/app/graphqlContext';
@@ -8,12 +8,14 @@ import { CurrentUser } from '../decorators/current-user.decorator';
 import { LoginInput } from '../models/dto/login.input';
 import { LoginResult } from '../models/login-result.model';
 import { AuthService } from '../services/auth.service';
+import { GqlThrottlerGuard } from '../guards/gql-throttler/gql-throttler.guard';
 
 @Resolver(() => LoginResult)
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @Query(() => LoginResult, { name: 'logIn' })
+  @UseGuards(GqlThrottlerGuard)
   async logIn(
     @Args() payload: LoginInput,
     @Context() context: GraphQLContext,
