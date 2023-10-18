@@ -1,6 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
+import * as NestMongoose from '@nestjs/mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Schema as MongooseSchema } from 'mongoose';
+import { HydratedDocument, Model, Schema as MongooseSchema } from 'mongoose';
 
 @ObjectType()
 @Schema()
@@ -9,11 +10,11 @@ export class User {
   _id: MongooseSchema.Types.ObjectId;
 
   @Field(() => String)
-  @Prop()
+  @Prop({ unique: true })
   username: string;
 
   @Field(() => String)
-  @Prop()
+  @Prop({ unique: true })
   email: string;
 
   @Field(() => String)
