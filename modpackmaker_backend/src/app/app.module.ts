@@ -13,6 +13,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 // import { ApolloServerPluginLandingPageProductionDefault } from '@apollo/server/plugin/landingPage/default';
 import * as mongooseUniqueValidator from 'mongoose-unique-validator';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import * as mongooseUniqueValidator from 'mongoose-unique-validator';
       connectionFactory: (connection) => {
         connection.plugin(mongooseUniqueValidator);
         return connection;
-      }
+      },
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
