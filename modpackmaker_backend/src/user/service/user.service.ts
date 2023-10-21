@@ -22,8 +22,7 @@ export class UserService {
 
   async finOne(filters: GetUserInput): Promise<User> {
     return this.userModel
-      .findOne()
-      .setOptions({ ...filters })
+      .findOne({ ...filters })
       .exec();
   }
 
