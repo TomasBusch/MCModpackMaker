@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { hash, verify } from 'argon2';
 import { NewUserInput } from 'src/user/models/dto/new-user.input';
 import { User } from 'src/user/models/user.model';
-import { UserService } from 'src/user/service/user.service';
+import { UserService } from 'src/user/services/user.service';
 import { LoginResult } from '../models/dto/login-result';
 import { LoginInput } from '../models/dto/login.input';
 

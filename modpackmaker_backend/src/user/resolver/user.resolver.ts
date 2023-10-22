@@ -6,7 +6,7 @@ import { ListUserInput } from '../models/dto/list-user.input';
 import { NewUserInput } from '../models/dto/new-user.input';
 import { UpdateUserInput } from '../models/dto/update-user.input';
 import { User } from '../models/user.model';
-import { UserService } from '../service/user.service';
+import { UserService } from '../services/user.service';
 
 const pubSub = new PubSub();
 

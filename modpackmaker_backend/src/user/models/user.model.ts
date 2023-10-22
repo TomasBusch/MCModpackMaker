@@ -28,6 +28,9 @@ export class User {
   @Field(() => String)
   @Prop()
   password: string;
+
+  @Prop({ type: [String], default: [] })
+  roles: string[];
 }
 
 export type UserDocument = HydratedDocument<User>;

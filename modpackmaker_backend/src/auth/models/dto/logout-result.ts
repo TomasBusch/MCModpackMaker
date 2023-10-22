@@ -2,6 +2,6 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class LogoutResult {
-  @Field()
+  @Field({ nullable: true })
   status: string;
 }

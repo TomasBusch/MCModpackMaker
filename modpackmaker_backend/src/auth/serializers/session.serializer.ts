@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportSerializer } from '@nestjs/passport';
 import { ObjectId } from 'mongoose';
 import { User } from 'src/user/models/user.model';
-import { UserService } from 'src/user/service/user.service';
+import { UserService } from 'src/user/services/user.service';
 import { LoginResult } from '../models/dto/login-result';
 
 @Injectable()

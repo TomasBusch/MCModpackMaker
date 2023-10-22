@@ -18,7 +18,7 @@ export class NewUserInput {
   @IsEmail()
   email: string;
 
-  @Field(() => String)
+  @Field(() => String, { nullable: true })
   @IsUrl()
   @IsOptional()
   avatar_image: string;

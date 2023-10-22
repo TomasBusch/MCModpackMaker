@@ -13,19 +13,19 @@ export class UpdateUserInput {
   @Field(() => String)
   _id: MongooseSchema.Types.ObjectId;
 
-  @Field()
+  @Field({ nullable: true })
   @IsAlphanumeric()
   username: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsEmail()
-  email?: string;
+  email: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsUrl()
   avatar_image: string;
 
-  @Field()
+  @Field({ nullable: true })
   @MinLength(12)
   @IsStrongPassword()
   password: string;

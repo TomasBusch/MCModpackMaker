@@ -2,12 +2,12 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class LoginResult {
-  @Field()
+  @Field({ nullable: true })
   username: string;
 
-  @Field()
+  @Field({ nullable: true })
   email: string;
 
-  @Field()
+  @Field({ nullable: true })
   avatar_image: string;
 }
