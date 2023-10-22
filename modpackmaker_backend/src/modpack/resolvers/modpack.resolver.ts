@@ -7,7 +7,7 @@ import { ListModpackInput } from '../models/dto/list-modpack.input';
 import { NewModpackInput } from '../models/dto/new-modpack.input';
 import { UpdateModpackInput } from '../models/dto/update-modpack.input';
 import { Modpack } from '../models/modpack.model';
-import { ModpackService } from '../service/modpack.service';
+import { ModpackService } from '../services/modpack.service';
 
 const pubSub = new PubSub();
 
@@ -16,9 +16,7 @@ export class ModpackResolver {
   constructor(private readonly modpackService: ModpackService) {}
 
   @Query(() => Modpack, { name: 'getModpack' })
-  async get(
-    @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
-  ): Promise<Modpack> {
+  async get(@Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId): Promise<Modpack> {
     const modpack = await this.modpackService.getById(_id);
     if (!modpack) {
       throw new NotFoundException(_id);
@@ -32,9 +30,7 @@ export class ModpackResolver {
   }
 
   @Mutation(() => Modpack, { name: 'createModpack' })
-  async create(
-    @Args('newModpackData') payload: NewModpackInput,
-  ): Promise<Modpack> {
+  async create(@Args('newModpackData') payload: NewModpackInput): Promise<Modpack> {
     const modpack = await this.modpackService.create(payload);
     pubSub.publish('modpackAdded', { modpackAdded: modpack });
     return modpack;
@@ -46,9 +42,7 @@ export class ModpackResolver {
   }
 
   @Mutation(() => Boolean, { name: 'deleteModpack' })
-  async delete(
-    @Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId,
-  ) {
+  async delete(@Args('_id', { type: () => String }) _id: MongooseSchema.Types.ObjectId) {
     return this.modpackService.delete(_id);
   }
 
