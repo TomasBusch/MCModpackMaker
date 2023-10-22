@@ -5,13 +5,14 @@ import { GraphQLContext } from 'src/app/graphqlContext';
 import { NewUserInput } from 'src/user/models/dto/new-user.input';
 import { User } from 'src/user/models/user.model';
 import { CurrentUser } from '../decorators/current-user.decorator';
+import { Role } from '../decorators/role.decorator';
+import { AuthenticatedGuard } from '../guards/authenticated/authenticated.guard';
 import { LocalAuthGuard } from '../guards/gql-local-auth/local-auth.guard';
 import { GqlThrottlerGuard } from '../guards/gql-throttler/gql-throttler.guard';
 import { LoginResult } from '../models/dto/login-result';
 import { LoginInput } from '../models/dto/login.input';
 import { LogoutResult } from '../models/dto/logout-result';
 import { AuthService } from '../services/auth.service';
-import { AuthenticatedGuard } from '../guards/authenticated/authenticated.guard';
 
 @Resolver(() => LoginResult)
 export class AuthResolver {
@@ -24,6 +25,7 @@ export class AuthResolver {
   }
 
   @UseGuards(AuthenticatedGuard)
+  @Role('admin')
   @Query(() => LoginResult, { name: 'getProfile' })
   async getProfile(@CurrentUser() user: User): Promise<LoginResult> {
     return user;
