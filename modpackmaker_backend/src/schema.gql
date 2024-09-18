@@ -1,0 +1,84 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type LoginResult {
+  avatar_image: String
+  email: String
+  username: String
+}
+
+type LogoutResult {
+  status: String
+}
+
+type Modpack {
+  _id: String!
+  image: String!
+  modIdList: [String!]!
+  name: String!
+  version: String!
+}
+
+type Mutation {
+  LogOut: LogoutResult!
+  SignUp(NewUserInput: NewUserInput!): LoginResult!
+  createModpack(newModpackData: NewModpackInput!): Modpack!
+  createUser(newUserData: NewUserInput!): User!
+  deleteModpack(_id: String!): Boolean!
+  deleteUser(_id: String!): Boolean!
+  logIn(email: String!, password: String!): LoginResult!
+  updateModpack(payload: UpdateModpackInput!): Modpack!
+  updateUser(payload: UpdateUserInput!): User!
+}
+
+input NewModpackInput {
+  image: String
+  modIdList: [String!]!
+  name: String!
+  version: String!
+}
+
+input NewUserInput {
+  avatar_image: String
+  email: String!
+  password: String!
+  username: String!
+}
+
+type Query {
+  getModpack(_id: String!): Modpack!
+  getModpackList(_id: String, limit: Int! = 25, skip: Int! = 0): [Modpack!]!
+  getProfile: LoginResult!
+  getUser(_id: String!): User!
+  getUserList(email: String, limit: Int! = 25, skip: Int! = 0, username: String): [User!]!
+}
+
+type Subscription {
+  modpackAdded: User!
+}
+
+input UpdateModpackInput {
+  _id: String!
+  image: String
+  modIdList: [String!]!
+  name: String!
+  version: String!
+}
+
+input UpdateUserInput {
+  _id: String!
+  avatar_image: String
+  email: String
+  password: String
+  username: String
+}
+
+type User {
+  _id: String!
+  avatar_image: String!
+  email: String!
+  password: String!
+  session: String!
+  username: String!
+}

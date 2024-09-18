@@ -1,6 +1,7 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import * as NestMongoose from '@nestjs/mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Exclude } from 'class-transformer';
 import { HydratedDocument, Model, Schema as MongooseSchema } from 'mongoose';
 
 @ObjectType()
@@ -25,6 +26,7 @@ export class User {
   @Prop()
   avatar_image: string;
 
+  @Exclude()
   @Field(() => String)
   @Prop()
   password: string;

@@ -1,7 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import * as session from 'express-session';
 import * as passport from 'passport';
+import * as path from 'path';
 import { AppModule } from './app/app.module';
+
+require('dotenv').config({ path: path.resolve('src', 'config', 'env', `${process.env.NODE_ENV}.env`) });
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

@@ -1,4 +1,4 @@
-import { UseGuards } from '@nestjs/common';
+import { UseGuards, UseInterceptors } from '@nestjs/common';
 import { Args, Context, Mutation, Query, Resolver } from '@nestjs/graphql';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { GraphQLContext } from 'src/app/graphqlContext';
@@ -13,19 +13,20 @@ import { LoginResult } from '../models/dto/login-result';
 import { LoginInput } from '../models/dto/login.input';
 import { LogoutResult } from '../models/dto/logout-result';
 import { AuthService } from '../services/auth.service';
+import MongooseClassSerializerInterceptor from '../interceptors/mongoose_class_serializer.interceptor';
 
 @Resolver(() => LoginResult)
+@UseInterceptors(MongooseClassSerializerInterceptor(User))
 export class AuthResolver {
   constructor(private readonly authService: AuthService) {}
 
   @UseGuards(LocalAuthGuard)
-  @Query(() => LoginResult, { name: 'logIn' })
+  @Mutation(() => LoginResult, { name: 'logIn' })
   async logIn(@Args() payload: LoginInput, @CurrentUser() user: User): Promise<LoginResult> {
     return user;
   }
 
   @UseGuards(AuthenticatedGuard)
-  @Role('admin')
   @Query(() => LoginResult, { name: 'getProfile' })
   async getProfile(@CurrentUser() user: User): Promise<LoginResult> {
     return user;
@@ -38,7 +39,6 @@ export class AuthResolver {
 
   @Mutation(() => LogoutResult, { name: 'LogOut' })
   async LogOut(@Context() ctx: GraphQLContext): Promise<LogoutResult> {
-    console.log('Logged Out: ');
     ctx.req.logOut((err: Error) => {});
     return { status: 'Logout' };
   }
