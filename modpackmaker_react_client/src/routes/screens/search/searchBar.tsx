@@ -1,22 +1,26 @@
-import { useCallback, useEffect, useState } from 'react';
-import { searchQueryStore } from './data/stores/searchQueryStore';
 import { debounce } from 'lodash';
+import { useEffect, useState } from 'react';
+import { searchQueryStore } from './data/stores/searchQueryStore';
 
 import * as HeroIcons from '@heroicons/react/24/outline';
-import ToggleButton from '../../../ui/toggleButton';
 import { useAtom } from 'jotai';
+import ToggleButton from '../../../ui/toggleButton';
 
 export default function SearchBar() { 
   const [query, setQuery] = useState("");
   const setSearchQuery = useAtom(searchQueryStore)[1];
 
-  const debounceQuery = useCallback(debounce((value: string) => {
-    setSearchQuery(value);
-  }, 200),[]);
-
   useEffect(() => {
-    debounceQuery(query);
-  }, [query]);
+    const debouncedQuery = debounce((value: string) => {
+      setSearchQuery(value);
+    }, 200);
+
+    debouncedQuery(query);
+    
+    return () => {
+      debouncedQuery.cancel && debouncedQuery.cancel();
+    };
+  }, [query, setSearchQuery]);
   
   return (
     <div className="flex items-center w-full gap-x-4">
