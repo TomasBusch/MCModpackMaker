@@ -9,11 +9,12 @@ import { Role } from '../decorators/role.decorator';
 import { AuthenticatedGuard } from '../guards/authenticated/authenticated.guard';
 import { LocalAuthGuard } from '../guards/gql-local-auth/local-auth.guard';
 import { GqlThrottlerGuard } from '../guards/gql-throttler/gql-throttler.guard';
+import MongooseClassSerializerInterceptor from '../interceptors/mongoose_class_serializer.interceptor';
 import { LoginResult } from '../models/dto/login-result';
 import { LoginInput } from '../models/dto/login.input';
 import { LogoutResult } from '../models/dto/logout-result';
 import { AuthService } from '../services/auth.service';
-import MongooseClassSerializerInterceptor from '../interceptors/mongoose_class_serializer.interceptor';
+import * as path from 'path';
 
 @Resolver(() => LoginResult)
 @UseInterceptors(MongooseClassSerializerInterceptor(User))
@@ -37,9 +38,22 @@ export class AuthResolver {
     return this.authService.signUp(payload);
   }
 
+  @UseGuards(AuthenticatedGuard)
   @Mutation(() => LogoutResult, { name: 'LogOut' })
   async LogOut(@Context() ctx: GraphQLContext): Promise<LogoutResult> {
-    ctx.req.logOut((err: Error) => {});
-    return { status: 'Logout' };
+    return new Promise((resolve, reject) => {
+      ctx.req.logout((err) => {
+        if (err) {
+          reject(false);
+        } else {
+          // Successfully logged out
+          ctx.req.session.destroy((err) => { 
+              ctx.res.redirect('/');
+          });
+
+          resolve({ status: 'SUCCESS' });
+        }
+      });
+    });
   }
 }

@@ -32,6 +32,14 @@ services:
     ports:
       - 6379:6379
 
+  redis_sessions:
+    restart: unless-stopped
+    container_name: redis_sessions
+    image: 'redislabs/redismod'
+    hostname: sessions
+    ports:
+      - 6378:6379
+
   backend:
     container_name: modpackmaker_backend
     restart: unless-stopped

@@ -12,8 +12,8 @@ export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
   async create(payload: NewUserInput): Promise<User> {
-    const createdModpack = new this.userModel(payload);
-    return createdModpack.save();
+    const createdUser = new this.userModel(payload);
+    return createdUser.save();
   }
 
   async getById(_id: MongooseSchema.Types.ObjectId): Promise<User> {
@@ -21,12 +21,9 @@ export class UserService {
   }
 
   async finOne(filters: GetUserInput): Promise<User> {
-    return this.userModel
-      .findOne({ ...filters })
-      .exec();
+    return this.userModel.findOne({ ...filters }).exec();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async findMany(filters: ListUserInput): Promise<User[]> {
     return this.userModel
       .find()
@@ -43,7 +40,7 @@ export class UserService {
   }
 
   async delete(_id: MongooseSchema.Types.ObjectId) {
-    const deletedModpack = await this.userModel.findByIdAndRemove({ _id: _id }).exec();
-    return deletedModpack;
+    const deletedUser = await this.userModel.findByIdAndRemove({ _id: _id }).exec();
+    return deletedUser;
   }
 }

@@ -12,10 +12,10 @@ export class LocalAuthGuard extends AuthGuard('local') {
   }
 
   async canActivate(context: ExecutionContext) {
-    await super.canActivate(context);
+    const result = (await super.canActivate(context)) as boolean;
     const req = this.getRequest(context);
     await super.logIn(req);
-    return true;
+    return result;
   }
 
   getRequest(context: ExecutionContext) {
